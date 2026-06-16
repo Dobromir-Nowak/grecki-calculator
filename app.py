@@ -23,8 +23,12 @@ def price(weight):
 
 # streamlit
 
-weight = st.number_input("Fish weight (kg)", 0.0)
+fish_weight = st.number_input("Fish weight [g]", 0.0)
 
-if weight:
-    st.write("Coefficient:", coefficient(weight))
-    st.write("Price:", price(weight))
+if fish_weight:
+    st.write("Price per kg:", price(fish_weight))
+
+total_weight = st.number_input("Total weight [kg]", 1.0)
+
+if total_weight:
+    st.write("Total price:", total_weight*price(fish_weight))
