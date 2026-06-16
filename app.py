@@ -2,37 +2,6 @@ import numpy as np
 import streamlit as st
 
 
-
-
-
-# # (weight, coefficient) points
-# points = [
-#     (0.2, 1.1),
-#     (0.5, 1.5),
-#     (1.0, 2.3),
-#     (2.0, 3.0),
-# ]
-
-# weights = np.array([p[0] for p in points])
-# coeffs = np.array([p[1] for p in points])
-
-# def coefficient(weight):
-#     return np.interp(weight, weights, coeffs)
-
-# def price(weight):
-#     c = coefficient(weight)
-#     return c * weight * 100  # whatever the formula is
-
-
-
-
-
-
-
-
-
-
-
 weight_g_data = np.array([
     1, 3, 5, 7, 10, 13, 15, 17, 20, 23,
     27, 30, 33, 36, 40, 45, 50, 55, 60, 65,
@@ -54,8 +23,8 @@ def W_interp(fish_weight_g):
 # streamlit
 
 # inputs
-H = st.number_input("H:", 7.50)
-fish_weight_g = st.number_input("Fish weight [g]", 100.0)
+H = st.number_input("H:", min_value=0., value = 7.50)
+fish_weight_g = st.number_input("Fish weight [g]", min_value = 1.0, max_value=200.0, value=100.0)
 
 # values
 W = W_interp(fish_weight_g)
@@ -68,7 +37,7 @@ if fish_weight_g:
     st.write("Price per fish:", round(price_fish, 4))
     st.write("W:", round(W, 3))
 
-total_weight = st.number_input("Total weight [kg]", 1.0)
+total_weight = st.number_input("Total weight [kg]", min_value=0.0, value=1.0)
 
 if total_weight:
     st.write("Total price:", round(total_weight*price_kg,2))
